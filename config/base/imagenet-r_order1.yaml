@@ -1,0 +1,53 @@
+seed_everything: 1
+accelerator: gpu
+strategy: null
+devices: 1
+num_nodes: 1
+precision: 32
+benchmark: true
+deterministic: true
+checkpoint: null
+data:
+  current_task: 0
+  dataset: imagenet-r
+  root: ./data
+  num_init_classes: 0
+  num_increment_classes: 20
+  class_order: null
+  memory:
+    algo_name: herding
+    max_size: 0
+    num_samples_per_class: 0
+    norm_feature: false
+  dataloader:
+    batch_size: 24
+    batch_size_val: 0
+    num_workers: 4
+    pin_memory: true
+    drop_last: true
+  eval_on: seen
+  val_split_ratio: 0.0
+  train_val_split_seed: 42
+module:
+  current_epoch: 0
+  num_epochs: 50
+  optimizer:
+    algo: Adam
+    lr: 0.00046875
+    weight_decay: 0.0
+    kwargs: {}
+  scheduler:
+    mode: linear
+    cycle: 0
+    scale_min: 0.0
+  schedule_unit: none
+  clip_grad_norm: 0.0
+  clip_grad_value: 0.0
+  accumulate_grad: 1
+  eval_every_n_epoch: 10
+  log_every_n_step: 10
+  summary_depth: 5
+  num_emas: 1
+  ema_decay: 0.9999
+  num_freeze_epochs: 30
+  eval_only_emas: false

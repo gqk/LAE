@@ -1,0 +1,12 @@
+extends:
+  - ./base/cifar100_order1.yaml
+module:
+  model:
+    backbone: ViT-B_16
+  adapt_blocks: [0, 1, 2, 3, 4]
+  pet_cls: Prefix
+  pet_kwargs:
+    length: 10
+    key_scale: null
+    val_scale: null
+    compensatory: true
