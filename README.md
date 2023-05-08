@@ -54,6 +54,8 @@ The "pre-training → downstream adaptation" presents both new opportunities and
 
 We provide [configs](./config) and [Makefile](./Makefile) to quickly reproduce the ten-tasks experimental results reported in the paper, run the following command if the `make` has been installed:
 
+:warning: Please note that the **train-validation split of ImageNet-R dataset** and **ViT-B_16 pre-training checkpoint** are consistent with the [L2P JAX code](https://github.com/google-research/l2p), and are different from the split used in the latest [CODA-P paper](https://github.com/GT-RIPL/CODA-Prompt). Therefore, the results reported in our paper and CODA paper cannot be directly compared. For more details, please refer to the [More Experimental Results](#more-experimental-results).
+
 ```shell
 make vit_adapter
 make vit_lora
@@ -68,6 +70,29 @@ make BASE="base/imagenet-r_order1.yaml" vit_adapter
 ```
 
 Modifiy `data.num_increment_classes` (`5/10` for CIFAR100/ImageNet-R) in base config files to reproduce `20-task` experiments.
+
+## More Experimental Results
+
+Recent paper CODA-P uses the different ImageNet-R train-validation split and pre-training checkpoint from ours. To enable a fair comparison, we conducted additional experiments on ImageNet-R with the same training settings as CODA-P and report the results in the table below. 
+
+The pre-training checkpoints can be found at [IN21K](https://storage.googleapis.com/vit_models/imagenet21k%2Bimagenet2012/ViT-B_16.npz) and [IN21K+1K](https://storage.googleapis.com/vit_models/augreg/B_32-i21k-300ep-lr_0.001-aug_medium1-wd_0.03-do_0.0-sd_0.0--imagenet2012-steps_20k-lr_0.03-res_224.npz), The key difference between them is the data augmentation, and IN21K+1K further fine-tunes on the ImageNet-1K dataset after pre-training on the ImageNet-21K dataset.
+
+The train and validation list files of CODA-P split can be found at [train_list_coda-p.txt](https://gist.githubusercontent.com/gqk/e127fe18bf179bdcbdf5e29a8c1ae523/raw/train_list_coda-p.txt), [val_list_coda-p.txt](https://gist.githubusercontent.com/gqk/e127fe18bf179bdcbdf5e29a8c1ae523/raw/val_list_coda-p.txt), which are transformed from the [CODA-P code](https://github.com/GT-RIPL/CODA-Prompt).
+
+| Approach       | Split   | Training Strategy   | ViT-B_16   | $A_{10}$   | $\bar{A}_{10}$ |
+|----------------|---------|---------------------|------------|------------|----------------|
+|  CODA-P        | L2P     | L2P                 |   IN21K    | 61.38      | 73.10          |
+| LAE (Prefix10) | L2P     | L2P                 |   IN21K    | 71.19      | 81.92          |
+|  CODA-P        | L2P     | CODA-P              |   IN21K    | 70.34      | 78.07          |
+| LAE (Prefix10) | L2P     | CODA-P              |   IN21K    | 72.27      | 79.97          |
+|    CODA-P      | CODA    | CODA-P              | IN21K+1K   | 74.43      | 83.91          |
+| LAE (Prefix10) | CODA    | CODA-P              | IN21K+1K   | 74.31      | 83.75          |
+
+Our LAE achieves comparable performance to CODA-P using the CODA-P split and IN21K+1K checkpoint, while outperforming it using the L2P split and IN21K checkpoint (which is the setting used in L2P and DualPrompt). All experiments were conducted using the same 4 x Nvidia 3090 GPUs (modify the `strategy` and `devices` fields in config file).
+
+## Acknowledgement
+
+We would like to thank [Jaeho Lee](https://github.com/JH-LEE-KR) for providing the PyTorch implementation of [L2P](https://github.com/JH-LEE-KR/l2p-pytorch) and [DualPrompt](https://github.com/JH-LEE-KR/dualprompt-pytorch), which served as a valuable reference for our code.
 
 ## Citation
 
