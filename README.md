@@ -85,8 +85,8 @@ The train and validation list files of CODA-P split can be found at [train_list_
 | LAE (Prefix10) | L2P     | DualPrompt          |   IN21K    | 71.19      | 81.92          |
 |  CODA-P        | L2P     | CODA-P              |   IN21K    | 70.34      | 78.07          |
 | LAE (Prefix10) | L2P     | CODA-P              |   IN21K    | 72.27      | 79.97          |
-|    CODA-P      | CODA    | CODA-P              | IN21K+1K   | 74.43      | 83.91          |
-| LAE (Prefix10) | CODA    | CODA-P              | IN21K+1K   | 74.31      | 83.75          |
+|    CODA-P      | CODA    | CODA-P              | IN21K+1K   | 74.31      | 83.75          |
+| LAE (Prefix10) | CODA    | CODA-P              | IN21K+1K   | 74.43      | 83.91          |
 
 Our LAE achieves comparable performance to CODA-P using the CODA-P split and IN21K+1K checkpoint, while outperforming it using the L2P split and IN21K checkpoint (which is the setting used in L2P and DualPrompt). All experiments were conducted using the same 4 x Nvidia 3090 GPUs (modify the `strategy` and `devices` fields in config file).
 
