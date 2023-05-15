@@ -81,8 +81,8 @@ The train and validation list files of CODA-P split can be found at [train_list_
 
 | Approach       | Split   | Training Strategy   | ViT-B_16   | $A_{10}$   | $\bar{A}_{10}$ |
 |----------------|---------|---------------------|------------|------------|----------------|
-|  CODA-P        | L2P     | L2P                 |   IN21K    | 61.38      | 73.10          |
-| LAE (Prefix10) | L2P     | L2P                 |   IN21K    | 71.19      | 81.92          |
+|  CODA-P        | L2P     | DualPrompt          |   IN21K    | 61.38      | 73.10          |
+| LAE (Prefix10) | L2P     | DualPrompt          |   IN21K    | 71.19      | 81.92          |
 |  CODA-P        | L2P     | CODA-P              |   IN21K    | 70.34      | 78.07          |
 | LAE (Prefix10) | L2P     | CODA-P              |   IN21K    | 72.27      | 79.97          |
 |    CODA-P      | CODA    | CODA-P              | IN21K+1K   | 74.43      | 83.91          |
