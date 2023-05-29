@@ -79,23 +79,23 @@ The pre-training checkpoints can be found at [IN21K](https://storage.googleapis.
 
 The train and validation list files of CODA-P split can be found at [train_list_coda-p.txt](https://gist.githubusercontent.com/gqk/e127fe18bf179bdcbdf5e29a8c1ae523/raw/train_list_coda-p.txt), [val_list_coda-p.txt](https://gist.githubusercontent.com/gqk/e127fe18bf179bdcbdf5e29a8c1ae523/raw/val_list_coda-p.txt), which are transformed from the [CODA-P code](https://github.com/GT-RIPL/CODA-Prompt).
 
-| Approach       | Split   | Training Strategy   | ViT-B_16   | $A_{10}$   | $\bar{A}_{10}$ |
-|----------------|---------|---------------------|------------|------------|----------------|
-|  CODA-P        | L2P     | DualPrompt          |   IN21K    | 61.38      | 73.10          |
-| LAE (Prefix10) | L2P     | DualPrompt          |   IN21K    | 71.19      | 81.92          |
-|  CODA-P        | L2P     | CODA-P              |   IN21K    | 70.34      | 78.07          |
-| LAE (Prefix10) | L2P     | CODA-P              |   IN21K    | 72.27      | 79.97          |
-|    CODA-P      | CODA-P  | CODA-P              | IN21K+1K   | 74.31      | 83.75          |
-| LAE (Prefix10) | CODA-P  | CODA-P              | IN21K+1K   | 74.43      | 83.91          |
+| Approach       | Split   | Training Strategy   | ViT-B_16   | $A_{10} (↑)$| $\bar{A}_{10}(↑)$ |
+|----------------|---------|---------------------|------------|-------------|-------------------|
+|  CODA-P        | L2P     | DualPrompt          |   IN21K    | 61.38       | 73.10             |
+| LAE (Prefix10) | L2P     | DualPrompt          |   IN21K    | 71.19       | 81.92             |
+|  CODA-P        | L2P     | CODA-P              |   IN21K    | 70.34       | 78.07             |
+| LAE (Prefix10) | L2P     | CODA-P              |   IN21K    | 72.27       | 79.97             |
+|    CODA-P      | CODA-P  | CODA-P              | IN21K+1K   | 74.31       | 83.75             |
+| LAE (Prefix10) | CODA-P  | CODA-P              | IN21K+1K   | 74.43       | 83.91             |
 
 Our LAE achieves comparable performance to CODA-P using the CODA-P split and IN21K+1K checkpoint, while outperforming it using the L2P split and IN21K checkpoint (which is the setting used in L2P and DualPrompt). All experiments were conducted using the same 4 x Nvidia 3090 GPUs (modify the `strategy` and `devices` fields in config file).
 
 We also compare our LAE with CODA-Prompt on 5-task DomainNet benchmark, results are shown below:
 
-| Approach       | Training Strategy   | ViT-B_16   | $A_{5}$   | $F_{5}$ |
-|----------------|---------------------|------------|-----------|---------------|
-|    CODA-P      |  CODA-P             | IN21K+1K   | 67.11     | 13.79         |
-| LAE (Prefix10) |  CODA-P             | IN21K+1K   | 68.37     | 8.33          |
+| Approach       | Training Strategy   | ViT-B_16   | $A_{5}(↑)$ | $F_{5}(↓)$  |
+|----------------|---------------------|------------|------------|-------------|
+|    CODA-P      |  CODA-P             | IN21K+1K   | 67.11      | 13.79       |
+| LAE (Prefix10) |  CODA-P             | IN21K+1K   | 68.37      | 8.33        |
 
 where $A_{5}$ and  $\bar{F}_{5}$ are last incremental accuracy and last average forgetting, respectively.
 
