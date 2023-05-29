@@ -97,7 +97,7 @@ We also compare our LAE with CODA-Prompt on 5-task DomainNet benchmark, results 
 |    CODA-P      |  CODA-P             | IN21K+1K   | 67.11      | 13.79       |
 | LAE (Prefix10) |  CODA-P             | IN21K+1K   | 68.37      | 8.33        |
 
-where $A_{5}$ and  $\bar{F}_{5}$ are last incremental accuracy and last average forgetting, respectively.
+where $A_{5}$ and  $F_{5}$ are last incremental accuracy and last average forgetting, respectively.
 
 ## Acknowledgement
 
